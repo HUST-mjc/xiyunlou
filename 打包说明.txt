@@ -1,0 +1,134 @@
+禧运楼 打包说明
+==================
+
+一、打包步骤
+
+1. 安装依赖：
+   pip install -r requirements.txt
+   pip install pyinstaller
+
+2. 双击运行 build.bat
+   （脚本会自动检测并安装 PyInstaller）
+
+3. 打包完成后，在 dist/ 目录中会生成：
+   - xiyunlou.exe      （主程序，约 15-25 MB）
+   - updater_new.exe   （更新程序，约 10-15 MB）
+   - img/              （角色资源，外部文件）
+   - version.json      （版本信息，外部文件）
+   - changelogs/       （更新日志，可选）
+   - global_config.json（首次运行自动生成）
+
+二、分发说明
+
+必须分发整个 dist 文件夹，包含：
+- xiyunlou.exe      （必需）
+- updater_new.exe   （必需，自动更新用）
+- img/              （必需，角色素材）
+- version.json      （必需，版本检查用）
+- changelogs/       （可选，更新日志）
+
+推荐的目录结构：
+xiyunlou/
+├── xiyunlou.exe         主程序
+├── updater_new.exe      更新器
+├── version.json         版本信息
+├── img/                 角色素材
+│   ├── icon.png
+│   ├── 梨安/
+│   ├── 恬豆/
+│   ├── 又一/
+│   ├── 沐霂/
+│   └── 明前奶绿/
+├── note/                便利贴底图（可选）
+├── changelogs/          更新日志（可选）
+│   ├── v1.0.0.md
+│   └── ...
+└── global_config.json   运行时生成
+
+三、使用说明
+
+用户需要：
+1. 解压整个文件夹
+2. 保持文件结构不变
+3. 双击 xiyunlou.exe 运行
+
+注意事项：
+- img 文件夹必须与 exe 在同一目录
+- version.json 必须与 exe 在同一目录
+- 不要单独分发 exe 文件
+
+四、自动更新说明
+
+- updater_new.exe 是独立程序，无需 Python 环境
+- 更新时会替换 exe 和资源文件
+- version.json 用于版本检查
+- 完全自动化的更新体验
+
+五、文件大小预估
+
+- xiyunlou.exe      : 15-25 MB
+- updater_new.exe   : 10-15 MB
+- img/              : 5-10 MB
+- 总大小            : 30-50 MB
+- 压缩后            : 15-25 MB
+
+六、自动更新功能说明
+
+1. 必须包含的文件：
+   - updater_new.py / updater_new.exe  （更新程序）
+   - version.json                      （版本信息和下载链接）
+   - update_checker.py                 （已包含在主程序中）
+
+2. 打包时注意：
+   - updater_new 必须独立打包（单文件）
+   - 复制到主程序目录下一起分发
+   - version.json 必须可读写
+
+3. 发布新版本时：
+   - 修改 version.json 中的 version 和 download_url
+   - 在 changelogs/ 添加对应版本的更新日志（vX.Y.Z.md）
+   - 运行 build.bat 打包
+   - 运行 build_zip.pyw 生成 zip
+   - 把 zip 上传到 GitHub Release
+   - download_url 格式：
+     https://github.com/HUST-mjc/xiyunlou/releases/download/vX.Y.Z/Xiyunlou-win-vX.Y.Z.zip
+
+4. 完整目录结构（含更新功能）：
+xiyunlou/
+├── xiyunlou.exe
+├── updater_new.exe
+├── version.json
+├── img/
+│   └── ...
+├── note/
+│   └── ...
+├── changelogs/
+│   ├── v1.0.0.md
+│   └── ...
+└── global_config.json    （可选）
+
+5. 用户更新流程：
+   - 程序启动时自动检查更新
+   - 发现新版本时显示更新对话框
+   - 用户点击"自动下载更新"
+   - 程序自动下载、解压、替换文件
+   - 自动重启完成更新
+
+6. 备份机制：
+   - 更新前自动备份到 backup_before_update/
+   - 不会覆盖用户配置文件（global_config.json 等）
+   - 更新失败可从备份恢复
+
+七、打包命令速查
+
+# 一键打包（推荐）
+build.bat
+
+# 手动打包主程序
+pyinstaller build.spec --clean
+
+# 手动打包更新器
+pyinstaller updater.spec --clean
+
+# 生成发布 zip
+python build_zip.pyw

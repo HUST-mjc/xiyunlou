@@ -1,0 +1,44 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ---------- 构建产物 ----------
+build/
+dist/
+dist_release/
+*.spec.bak
+*.zip
+
+# ---------- 临时文件 ----------
+temp_update/
+backup_before_update/
+_update_updater.bat
+bili_dynamic_dump.json
+
+# ---------- 用户数据（含个人隐私/偏好） ----------
+global_config.json
+stats.json
+ddm_config.json
+img/*/config.json
+img/*/custom_layers.json
+img/*/*.bak
+
+# ---------- 运行时产物 ----------
+clips/
+screenshots/
+special_days.ics
+
+# ---------- 重命名脚本的备份 ----------
+.rename_backup/
+
+# ---------- IDE ----------
+.vscode/
+.idea/
+
+# ---------- 系统文件 ----------
+Thumbs.db
+.DS_Store
