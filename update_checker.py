@@ -102,8 +102,9 @@ class UpdateChecker:
         self.proxy_url = "https://gh-proxy.com/"
         self.repo_url = "https://github.com/HUST-mjc/xiyunlou"
         self.github_release_url = "https://github.com/HUST-mjc/xiyunlou/releases/"
-        self.lanzou_url = "https://evelynal.lanzoum.com/b0j1b6kdg"
-        self.lanzou_password = "asoul"
+        # ★ 改为百度网盘
+        self.pan_url = "https://pan.baidu.com/s/1bM5azUo-7ZnRDruLyFPvWA?pwd=sxwz"
+        self.pan_password = "sxwz"
         self.check_thread = None
         
     def get_local_version(self):
@@ -291,7 +292,7 @@ class UpdateChecker:
         download_info.setMaximumHeight(100)
         download_html = "<h3>下载地址：</h3>"
         download_html += f"<p><b>GitHub：</b><a href='{self.github_release_url}'>{self.github_release_url}</a></p>"
-        download_html += f"<p><b>蓝奏云：</b><a href='{self.lanzou_url}'>{self.lanzou_url}</a> (密码: {self.lanzou_password})</p>"
+        download_html += f"<p><b>百度网盘：</b><a href='{self.pan_url}'>{self.pan_url}</a> (提取码: {self.pan_password})</p>"
         download_info.setHtml(download_html)
         download_info.setOpenExternalLinks(True)
         layout.addWidget(download_info)
